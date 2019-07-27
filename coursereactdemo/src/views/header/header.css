@@ -1,0 +1,50 @@
+
+.trigger {
+  font-size: 20px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color:blue;
+}
+
+.logo {
+  
+  height: 32px;
+  margin: 18px;
+  font-size: 15px;
+  color: white
+  
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+  background-color: #1d2433!important;
+  border-radius: 25px;
+  width: 90%!important;
+}
+.sider::after{
+  display: block;
+    content: "";
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -9;
+}
+.sider{
+  background-color: #292d3d;
+  min-height:100vh;
+  max-height:inherit;
+}
+
+.ant-layout-sider-children {
+  height: 100%;
+  margin-top: -0.1px;
+  padding-top: 0.1px;
+  position: fixed;
+  overflow-y: auto;
+}

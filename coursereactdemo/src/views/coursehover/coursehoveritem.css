@@ -1,0 +1,16 @@
+.course-hover-item {
+    left: calc(100% - 15px);
+    top: -25%;
+    width: 300px;
+    min-height: 200px;
+    overflow: visible;
+    z-index: 10;
+    padding: 15px 15px;
+    -webkit-transition: all .25s ease-in;
+    transition: all .25s ease-in;
+    height: auto;
+    color: #464d69;
+    text-align: justify;
+    font-size: 14px;
+
+}

@@ -1,0 +1,16 @@
+.wrap-main-div {
+     min-height: 400px;
+     background-color : black;
+     padding: 3rem; 
+}
+.wrap-div {
+    padding:24px;
+    display:flex; 
+}
+.color-white {
+    color:white;
+}
+.border-video {
+    border:15px solid white;
+    border-radius:25px;
+}

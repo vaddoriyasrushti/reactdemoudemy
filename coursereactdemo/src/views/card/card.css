@@ -1,0 +1,23 @@
+.make-ellipse {
+    display: -webkit-box!important;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    width: calc(100% - 1px);
+    height: 42px;
+    min-height: 60px;
+    margin-bottom: 5px;
+}
+
+.description {
+    color: #464d69!important;
+    font-size: 20px!important;
+}
+.price {
+    text-align: right;
+}
+.ant-card-body {
+    padding: 16px 20px!important;
+    zoom: 1;
+}
