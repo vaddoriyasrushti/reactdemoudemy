@@ -4,6 +4,10 @@ export function fetchcategories(){
     return baseService.get('/categories')
 }
 
+export function fetchallsubcategories(){
+    return baseService.get('/subcategories')
+}
+
 export function fetchsubcategoriesbyname(catname){
     return baseService.get('/subcategories/'+catname)
 }
@@ -11,3 +15,4 @@ export function fetchsubcategoriesbyname(catname){
 export function fetchsubcategoriesbyid(id){
     return baseService.get('/subcategories/id/'+id)
 }
+ 

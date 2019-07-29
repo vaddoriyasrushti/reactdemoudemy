@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import { Icon } from 'antd';
-import { Button } from 'reactstrap'
+import { Button } from 'reactstrap';
+import { connect } from 'react-redux'
+import { bindActionCreators } from "redux";
+import * as cartAction from '../../action/cart';
 import './coursehoveritem.css'
 
 class Coursehover extends Component {
-
+    addtocart=(x)=>{
+        console.log("x",x);
+        console.log("action",this.props.action.cart)
+        this.props.action.cart.addCourse(x)
+    }
     render() {
         return (
             <div className="course-hover-item">
@@ -20,11 +27,29 @@ class Coursehover extends Component {
                     <li>Vivamus non ipsum in nisi porttitor suscipit.</li>
                     <li>Aliquam ut dolor in lorem accumsan porta.</li>
                 </ul>
-                <div><Button color="danger" block>Add To Cart</Button></div>
+                
+                <div><Button color="danger" block onClick={()=>{this.addtocart(this.props.detail)}}>Add To Cart</Button></div>
+                <div><Button color="danger" block onClick={()=>{this.addtocart(this.props.detail)}}>Add To Cart</Button></div>
             </div>
         );
     }
 }
 
+const mapStateToProps = (state) => {
+    return (
+      {
+        // showsubcatbyname: state.subcategories.subcatbyname,
+        // route:state.route.pathname
+        cart:state.cart
+      }
+    );
+  }
 
-export default Coursehover
+const mapDispatchToProps = (dispatch) => ({
+    action: {
+      cart: bindActionCreators(cartAction, dispatch),
+      // route:bindActionCreators(routeAction,dispatch)
+    }
+  })
+export default connect(mapStateToProps,mapDispatchToProps)(Coursehover);
+

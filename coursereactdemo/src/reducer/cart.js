@@ -1,25 +1,26 @@
 const INITIAL_STATE = {
-    allcourses:[],
-    subcatbyname: [],
-    detailsoftopic:[],
-    err_msg: '',
-    // productCart:[]
+    //coursecart:[],
+    courseCart:[]
 }
-export const FetchSubcatDatabyname = "FetchSubcatDatabyname";
-export const FetchSubcatDatabyid = "FetchSubcatDatabyid";
-export const FetchAllSubcategories = 'FetchAllSubcategories';
-// export const addDataToCart="addDataToCart";
+export const FetchCartdataofuser = "FetchCartdataofuser";
+export const DeleteCartdata = "DeleteCartdata";
+export const Postcartdata = 'Postcartdata';
+export const addDataToCart="addDataToCart";
 export const InvalidData = "InvalidData"
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case 'FetchSubcatDatabyname':
+        case 'FetchCartdataofuser':
             return Object.assign({}, state, { subcatbyname: action.data });
-        
-        case 'FetchSubcatDatabyid':
+
+        case 'addDataToCart':{
+            return Object.assign({},state,{ courseCart:action.data })
+        }
+
+        case 'DeleteCartdata':
                 return Object.assign({}, state, { detailsoftopic: action.data });
                 
-        case 'FetchAllSubcategories':
+        case 'Postcartdata':
                 return Object.assign({},state,{allcourses:action.data});
 
         case 'InvalidData': {

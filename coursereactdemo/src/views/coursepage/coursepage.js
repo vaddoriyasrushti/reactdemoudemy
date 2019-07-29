@@ -8,7 +8,7 @@ import '../slidingtab/slidingtab.css'
 import { Row, Col } from 'antd';
 import Card from '../card/card';
 // import * as routeAction from '../../action/route'
-import { withRouter } from "react-router-dom";
+// import { withRouter } from "react-router-dom";
 
 const { Content } = Layout;
 
@@ -69,5 +69,5 @@ const mapDispatchToProps = (dispatch) => ({
       // route:bindActionCreators(routeAction,dispatch)
     }
   })
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Coursepage));
+export default connect(mapStateToProps,mapDispatchToProps)(Coursepage);
 
