@@ -1,0 +1,38 @@
+.cart-header{
+    background-color:#5d92f4;
+    height: 56px;
+}
+.item-description{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.img-border{
+    border:2px solid black
+}
+.set-cartdetail{
+    padding-left:10px;
+    width:250px;
+    padding-right:10px;
+}
+.cartcontent{
+    height:auto;
+    max-height:275px;
+    overflow-y: auto;
+    scrollbar-width:10px;
+   
+}
+.flexcss{
+    display:flex;
+}
+.footercart{
+    display:flex;
+    border-top: 1px solid lightgray;
+    padding-top:10px;
+}
+.emptycart{
+    color:brown;
+    font-size:20px;
+    text-align: center;
+    font-weight:500; 
+}

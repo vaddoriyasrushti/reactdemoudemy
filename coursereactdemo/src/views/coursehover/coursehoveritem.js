@@ -27,9 +27,10 @@ class Coursehover extends Component {
                     <li>Vivamus non ipsum in nisi porttitor suscipit.</li>
                     <li>Aliquam ut dolor in lorem accumsan porta.</li>
                 </ul>
-                
-                <div><Button color="danger" block onClick={()=>{this.addtocart(this.props.detail)}}>Add To Cart</Button></div>
-                <div><Button color="danger" block onClick={()=>{this.addtocart(this.props.detail)}}>Add To Cart</Button></div>
+                {
+                  this.props.cart.courseCart.some(el=>el.id===this.props.detail.id)? <div><Button color="danger" block >Go To Cart</Button></div>:
+                  <div><Button color="danger" block onClick={()=>{this.addtocart(this.props.detail)}}>Add To Cart</Button></div>
+                }
             </div>
         );
     }

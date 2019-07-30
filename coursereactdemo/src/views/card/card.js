@@ -26,7 +26,7 @@ class CardDemo extends Component {
                     <div className="make-ellipse description" >{this.props.details.description}</div>
                     <div className="fs-14 mb-2">{this.props.details.author}</div>
                     <Rate allowHalf defaultValue={2.5} />
-                    <div className="price"><h5 color="primary">${this.props.details.price}</h5><del>$900</del></div>
+                    <div className="price"><h5 color="primary">₹{this.props.details.price}</h5><del>₹2000</del></div>
                  
                 </Card>
                 </Popover>

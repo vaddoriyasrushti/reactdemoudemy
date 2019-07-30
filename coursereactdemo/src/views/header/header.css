@@ -48,3 +48,7 @@
   position: fixed;
   overflow-y: auto;
 }
+.cart-logo-style {
+  float: right;
+  margin-right:24px;
+}

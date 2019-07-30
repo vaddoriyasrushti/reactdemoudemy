@@ -1,27 +1,34 @@
 const INITIAL_STATE = {
     //coursecart:[],
-    courseCart:[]
+    courseCart: []
 }
-export const FetchCartdataofuser = "FetchCartdataofuser";
+export const PostCartItem = 'PostCartItem';
+export const addDataToCart = "addDataToCart";
+export const FetchCartitemofuser = "FetchCartitemofuser";
+export const emptycourse = "emptycourse";
 export const DeleteCartdata = "DeleteCartdata";
-export const Postcartdata = 'Postcartdata';
-export const addDataToCart="addDataToCart";
 export const InvalidData = "InvalidData"
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case 'FetchCartdataofuser':
-            return Object.assign({}, state, { subcatbyname: action.data });
-
-        case 'addDataToCart':{
-            return Object.assign({},state,{ courseCart:action.data })
+        case 'addDataToCart': {
+            return Object.assign({}, state, { courseCart: action.data })
         }
 
+        case 'PostCartItem':
+            const cart = state.courseCart.concat(action.data)
+            return Object.assign({}, state, { courseCart: cart });
+
+        case 'FetchCartitemofuser':
+            return Object.assign({}, state, { courseCart: action.data });
+
+        case 'emptycourse':
+            return Object.assign({}, state, { courseCart: [] });
+
         case 'DeleteCartdata':
-                return Object.assign({}, state, { detailsoftopic: action.data });
-                
-        case 'Postcartdata':
-                return Object.assign({},state,{allcourses:action.data});
+             state.courseCart.splice(action.pos,1)
+            return Object.assign({}, state, { courseCart: state.courseCart});
+
 
         case 'InvalidData': {
             return Object.assign({}, state, { err_msg: action.data })

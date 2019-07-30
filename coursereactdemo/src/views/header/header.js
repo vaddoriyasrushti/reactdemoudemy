@@ -14,6 +14,8 @@ import Coursepage from '../coursepage/coursepage';
 import * as CategoriesAction from '../../action/categories'
 import * as SUbCategoriesAction from '../../action/subcategories'
 import * as cartAction from '../../action/cart';
+import Cartitem from '../cartitem/cartitem'
+import cartdisplay from '../cartdisplay/cartdisplay';
 // import { matchPath } from 'react-router'
 
 
@@ -43,12 +45,24 @@ class SideNavbar extends Component {
         console.log("cxdscdscds")
         this.props.action.categories.FetchCategoriesDataAction();
         if(localStorage.getItem("courses")){
-        this.props.action.cart.addstoragetoredux();
-    }
+            this.props.action.cart.addstoragetoredux();
+        }
+        if(localStorage.getItem("user")){
+            console.log("abab")
+            var user=JSON.parse(localStorage.getItem("user"))
+           this.props.action.cart.getCartitembyuseridAction(user.user[0].userid)
+        }
     }
     routecategory(catname) {
         this.props.history.push(`/course/${catname}`)
         //  this.props.history.push({pathname:`/course/${catname}`,state: { coursename: catname }})
+    }
+    routecourse =() =>{
+        this.props.history.push('/')
+    }
+    callcart = () =>{
+        
+        this.props.history.push('/cart')
     }
     render() {
         const content = (
@@ -58,6 +72,9 @@ class SideNavbar extends Component {
                         <div key={index} onClick={() => this.routecategory(value.categoriesname)}>{value.categoriesname}</div>,]
                 })}
             </div>
+        );
+        const cartitem = (
+             <Cartitem {...this.props}/>
         );
         return (
             <Layout>
@@ -77,9 +94,10 @@ class SideNavbar extends Component {
                             this.props.auth.token ? JSON.parse(localStorage.getItem('user')).user[0].fullname : 'User'
                         }</span> : null}
                     </div>
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} style={{ backgroundColor: '#292d3d' }}>
-                        <Menu.Item key="1">
-                            <Icon type="book" />
+                    {/* <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} style={{ backgroundColor: '#292d3d' }}> */}
+                    <Menu theme="dark" mode="inline" style={{ backgroundColor: '#292d3d' }}>
+                        <Menu.Item onClick={this.routecourse}>
+                            <Icon type="book"/>
                             <span>Courses</span>
                         </Menu.Item>
                     </Menu>
@@ -97,8 +115,9 @@ class SideNavbar extends Component {
                                 type='appstore'
                             />
                         </Popover>
-                        <div className='hello' style={{ float: 'right' ,marginRight:24}}>
-                        <span style={{ marginRight: 24 }}>
+                        <div className='cart-logo-style'>
+                        <Popover content={cartitem} placement="bottomRight">
+                        <span style={{ marginRight: 24 }} onClick={this.callcart}>
                             <Badge count={this.props.cart.courseCart.length}>
                                 <Icon
                                     style={{fontSize:'25px'}}
@@ -107,6 +126,7 @@ class SideNavbar extends Component {
                                 </Icon>
                             </Badge>
                         </span>
+                        </Popover>
                         {!this.props.auth.token ? [<Button key="signup" color="danger" className="mr-2" tag={Link} to='/signup'>SignUp</Button>,
                         <Button key="login" color="danger" tag={Link} to='/login'>Login</Button>] :
                             <Button  color="danger" onClick={this.logout}>Logout</Button>}
@@ -118,6 +138,7 @@ class SideNavbar extends Component {
                     <Route path="/login" component={Signup} />
                     <Route exact path="/course/:coursename/:topic" component={Coursedetail} {...this.props} />
                     <Route exact path="/course/:coursename" component={Coursepage} />
+                    <Route exact path="/cart" component={cartdisplay} />
                     {/* <Route exact path="/course/:coursename" 
                         render={(routeProps) => ( <Coursepage xyz={routeProps} /> )}/> */}
 
