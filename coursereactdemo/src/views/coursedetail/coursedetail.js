@@ -8,13 +8,6 @@ import { bindActionCreators } from "redux";
 const { Content } = Layout;
 
 class Coursedetail extends Component {
-    courseheader = {
-        padding: 12,
-        background: '#fff',
-        minHeight: '65px',
-        fontSize: '25px',
-        fontWeight: 500,
-    }
     state = {
         details: []
     }
@@ -23,20 +16,12 @@ class Coursedetail extends Component {
             this.setState({
                 details: res.data[0]
             })
-            console.log("cds", this.state.details)
-            console.log("cdsxsaxa", `http://localhost:3003/images/${this.state.details.videos}`)
-        }
-        )
-
-
+        })
     }
-    // componentDidMount(){
-    //     console.log("details",this.props.detailsoftopic)
-    // }
     render() {
         return (
             <Content style={{ margin: '24px' }}>
-                <div style={this.courseheader}>{this.props.match.params.topic}</div>
+                <div className="courseheader">{this.props.match.params.topic}</div>
                 <div style={{ paddingBottom: '30px' }} />
                 <div className="wrap-main-div">
                     <div className="wrap-div">
@@ -75,14 +60,12 @@ const mapStateToProps = (state) => {
     return (
         {
             showsubcatbyname: state.subcategories.subcatbyname,
-            route: state.route.pathname
         }
     );
 }
 const mapDispatchToProps = (dispatch) => ({
     action: {
         subcategories: bindActionCreators(SUbCategoriesAction, dispatch),
-        //   route:bindActionCreators(routeAction,dispatch)
     }
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Coursedetail);

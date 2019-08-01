@@ -5,18 +5,19 @@ import * as service from '../service/service'
 export const postCartitemAction = (data) => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            cartservice.postcartitem(data).then((res) => {
-                console.log("X", res)
-                if (res) {
-                    service.fetchsubcategoriesbyid(res.data.catid).then((res) => {
-                        dispatch({
-                            type: PostCartItem,
-                            data: res.data
-                        });
-                    })
-                }
-                resolve(res)
-            })
+            cartservice.postcartitem(data)
+                .then((res) => {
+                    console.log("X", res)
+                    if (res) {
+                        service.fetchsubcategoriesbyid(res.data.catid).then((res) => {
+                            dispatch({
+                                type: PostCartItem,
+                                data: res.data
+                            });
+                        })
+                    }
+                    resolve(res)
+                })
                 .catch((error) => {
                     if (error.res) {
                         dispatch({
@@ -28,28 +29,28 @@ export const postCartitemAction = (data) => {
         })
     }
 }
-
 export const getCartitembyuseridAction = (userid) => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            cartservice.getcartitembyuserid(userid).then((res) => {
-                if (res) {
-                    var x = []
-                    Promise.all([res.data.map((item) => {
-                        service.fetchsubcategoriesbyid(item.catid).then((res) => {
-                            x.push(res.data[0])
+            cartservice.getcartitembyuserid(userid)
+                .then((res) => {
+                    if (res) {
+                        var x = []
+                        Promise.all([res.data.map((item) => {
+                            service.fetchsubcategoriesbyid(item.catid).then((res) => {
+                                x.push(res.data[0])
+                            })
+                            console.log("1")
+                        }),
+                        console.log("SDcsdcfsd"),
+                        dispatch({
+                            type: FetchCartitemofuser,
+                            data: x
                         })
-                        console.log("1")
-                    }),
-                    console.log("SDcsdcfsd"),
-                    dispatch({  
-                        type: FetchCartitemofuser,
-                        data: x
-                    })
-                    ])
-                }
-                resolve(res)
-            })
+                        ])
+                    }
+                    resolve(res)
+                })
                 .catch((error) => {
                     if (error.res) {
                         dispatch({
@@ -69,14 +70,13 @@ export const addDataToCartAction = (data) => {
         var user = JSON.parse(localStorage.getItem("user"));
         var crs = JSON.parse(localStorage.getItem("courses"));
         if (user) {
-            var x = {
+            var x1 = {
                 userid: user.user[0].userid,
                 catid: data.id
             }
-            dispatch(postCartitemAction(x))
+            dispatch(postCartitemAction(x1))
         }
         else {
-
             if (crs) {
                 products = JSON.parse(localStorage.getItem('courses'));
             }
@@ -86,18 +86,18 @@ export const addDataToCartAction = (data) => {
     }
 }
 export const addCourse = (i) => {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         return new Promise((resolve, reject) => {
             let course = []
             var x = 0;
             var user = JSON.parse(localStorage.getItem("user"));
             var crs = JSON.parse(localStorage.getItem("courses"));
             if (user) {
-                var x = {
+                var x2 = {
                     userid: user.user[0].userid,
                     catid: i.id
                 }
-                dispatch(postCartitemAction(x))
+                dispatch(postCartitemAction(x2))
             }
             else {
                 if (crs) {
@@ -115,7 +115,7 @@ export const addCourse = (i) => {
                 }
                 course.push(i);
                 var y = [i]
-                if (x == 1) {
+                if (x === 1) {
                     y = [...course]
                     // y = [...z].concat(i)
                 }
@@ -155,17 +155,16 @@ export const removeCourse = (id) => {
                 return x.id;
             }).indexOf(id);
             if (user) {
-                cartservice.deletecartitem(user.user[0].userid,id).then((res) => {
-                    dispatch({
-                        type: DeleteCartdata,
-                        pos: elementPos
+                cartservice.deletecartitem(user.user[0].userid, id)
+                    .then((res) => {
+                        dispatch({
+                            type: DeleteCartdata,
+                            pos: elementPos
+                        })
                     })
-                })
-
             }
             else {
                 if (crs) {
-                   
                     try {
                         crs.splice(elementPos, 1)
                         localStorage.setItem("courses", JSON.stringify(crs));
@@ -182,87 +181,3 @@ export const removeCourse = (id) => {
         })
     }
 }
-
-
-// addCourse(
-//     dispatch
-//   }, i) {
-//     var user = JSON.parse(localStorage.getItem("user"));
-//     var crs = JSON.parse(localStorage.getItem("courses"));
-
-//     if (user) {
-//       this.state.cartitem.push(i.id)
-//       //  this.state.cartitem=this.state.cartitem
-//       let data = {
-//         userid: user.userid,
-//         catid: i.id
-//       };
-//       dispatch("cart", data);
-//       // this.state.cartitem.push(i.id)
-//       if (this.state.selectedcourse == null) {
-//         this.state.selectedcourse = [];
-//       } else {
-
-//         var elementPos = this.state.selectedcourse.map(function (x) {
-//           return x.id;
-//         }).indexOf(i.id);
-
-//         if (elementPos == -1) {
-//           // this.state.cartitem.push(i.id)
-//           this.state.selectedcourse.push(i);
-//         }
-//       }
-//     } else {
-
-//       if (crs == null) {
-//         this.state.selectedcourse = [];
-//       }
-//       if (crs) {
-//         try {
-//           this.state.selectedcourse = crs;
-//         } catch (e) {
-//           localStorage.removeItem("courses");
-//         }
-//         var allitems = JSON.parse(localStorage["courses"]);
-//         for (var j = 0; j < allitems.length; j++) {
-//           if (allitems[j].id == i.id) {
-//             return;
-//           }
-//         }
-//       }
-//       var x = {
-//         id: i.id,
-//         populartopic: i.populartopic,
-//         author: i.author,
-//         price: i.price,
-//         description: i.description,
-//         topicimage: i.topicimage,
-//         catname: i.catname
-//       };
-
-//       this.state.selectedcourse.push(x);
-//       this.state.cartitem.push(x.id)
-//       dispatch("saveCourses");
-//       this.state.total.push(i.price);
-//     }
-//   },
-//   saveCourses({
-//     commit
-//   }) {
-//     const parsed = JSON.stringify(this.state.selectedcourse);
-//     localStorage.setItem("courses", parsed);
-//     this.state.counter = JSON.parse(localStorage.getItem("courses")) ?
-//       JSON.parse(localStorage.getItem("courses")).length :
-//       0;
-//   },
-//   cart({
-//     commit
-//   }, data) {
-//     cartservice
-//       .postcartitem(data)
-//       .then(res => {
-//         this.state.cartitem.push(data.catid)
-//         this.state.counter = this.state.counter + 1;
-//       })
-//       .catch(err => console.log(err));
-//   },

@@ -29,7 +29,7 @@ export const loginUser = (credentials) => {
                                       return x.id;
                                     }).indexOf(item.id);
                             
-                                    if (elementPos == -1) {
+                                    if (elementPos === -1) {
                                         dispatch(cartaction.postCartitemAction(data))
                                     }
                                

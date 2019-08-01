@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Card, Rate} from 'antd';
+import { Card, Rate,Popover} from 'antd';
 import './card.css'
-import { Popover } from 'antd'
 import Coursehover from '../coursehover/coursehoveritem'
 
 class CardDemo extends Component {
@@ -24,9 +23,10 @@ class CardDemo extends Component {
                     cover={<img alt="example" height='170px' src={'http://localhost:3003/images/'+ this.props.details.topicimage}/>}
                 >
                     <div className="make-ellipse description" >{this.props.details.description}</div>
+                    <div className="mb-2">For : {this.props.details.allsubtosub}</div>
                     <div className="fs-14 mb-2">{this.props.details.author}</div>
                     <Rate allowHalf defaultValue={2.5} />
-                    <div className="price"><h5 color="primary">₹{this.props.details.price}</h5><del>₹2000</del></div>
+                    <div className="price"><h5 color="primary">₹{this.props.details.price}</h5></div>
                  
                 </Card>
                 </Popover>

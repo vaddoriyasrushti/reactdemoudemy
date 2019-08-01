@@ -8,8 +8,6 @@ import './coursehoveritem.css'
 
 class Coursehover extends Component {
     addtocart=(x)=>{
-        console.log("x",x);
-        console.log("action",this.props.action.cart)
         this.props.action.cart.addCourse(x)
     }
     render() {
@@ -39,8 +37,6 @@ class Coursehover extends Component {
 const mapStateToProps = (state) => {
     return (
       {
-        // showsubcatbyname: state.subcategories.subcatbyname,
-        // route:state.route.pathname
         cart:state.cart
       }
     );
@@ -49,7 +45,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
     action: {
       cart: bindActionCreators(cartAction, dispatch),
-      // route:bindActionCreators(routeAction,dispatch)
     }
   })
 export default connect(mapStateToProps,mapDispatchToProps)(Coursehover);

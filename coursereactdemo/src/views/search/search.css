@@ -1,5 +1,8 @@
- 
-.courseheader{
+.color {
+    background-color: lightgray;
+    min-height: 150px;
+  }
+  .courseheader{
     padding: 12px;
     background: #fff;
     min-height: 65px;
