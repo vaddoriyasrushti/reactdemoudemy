@@ -1,0 +1,16 @@
+.afterheader {
+    margin: 64px 24px 5px
+}
+.headercourse {
+    padding: 12px;
+    background: #fff;
+    min-height: 65px;
+    font-size: 25px;
+    font-weight: 500;
+}
+.paddingbetween {
+    padding-bottom: 30px;
+}
+.tabheight {
+    height: auto;
+}

@@ -1,6 +1,5 @@
 import React from 'react';
 import Sidenavbar from './views/header/header'
-// import Signup from './views/signup/signup'
 import { withRouter } from "react-router-dom";
 
 function App(props) {

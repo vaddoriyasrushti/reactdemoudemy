@@ -1,0 +1,15 @@
+.validationcolor{
+    color:red
+}
+.form {
+    width: 500px;
+}
+.wrap-registration {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+.registrationavatar {
+    margin-top: 40px;
+    text-align: center;
+}

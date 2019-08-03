@@ -1,0 +1,26 @@
+.flexcss{
+    display:flex;
+}
+.img-border{
+    border:2px solid black
+}
+.setcartdetail{
+    padding-left:15px;
+    width:650px;
+    padding-right:10px;
+}
+.itemdescription{
+    color: #464d69!important;
+    font-size: 20px!important;
+}
+.course-header{
+    padding: 12px;
+    background: #fff;
+    min-height: 65px;
+}
+.sideratingandprice {
+    color: red;
+    padding-right: 10px;
+    width: 400px;
+    text-align: right;
+}

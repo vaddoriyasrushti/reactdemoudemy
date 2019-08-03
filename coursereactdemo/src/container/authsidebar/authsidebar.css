@@ -1,0 +1,41 @@
+/* .session-wrapper {
+    position: relative;
+    height: 100%;
+} */
+
+.background-class {
+    display:block;
+    position:'relative';
+    background-size:'cover';
+    height:calc(100vh - 64px);
+}
+.slider-left {
+    text-align:center;
+    display:inline-block;
+    position:absolute;
+    left:50%;
+    top:45%;
+    transform:translate(-50%,-50%);
+    color:white;
+    width:80%;
+}
+.borderavtar {
+    border: 5px solid white;
+    
+}
+.color-overimage {
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    height: calc(100vh - 64px);
+}
+
+.author {
+    color: white;
+}
+.profession {
+    font-size: 18px;
+}
+.descriptionblock {
+    font-size: 18px;
+    text-align: justify;
+}

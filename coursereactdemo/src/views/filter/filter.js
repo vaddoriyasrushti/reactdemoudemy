@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
 import { Layout, Button, Checkbox } from 'antd';
 import * as SUbCategoriesAction from '../../action/subcategories'
-import '../slidingtab/slidingtab.css'
+import '../../container/slidingtab/slidingtab.css'
 import { Row, Icon, Select } from 'antd';
 import './filter.css';
-import Horizontalcard from '../horizontalcard/horizonatalcard';
+import Horizontalcard from '../../container/horizontalcard/horizonatalcard';
 
 var orderBy = require('lodash.orderby');
 const { Option } = Select;
@@ -86,9 +86,9 @@ class Filter extends Component {
     }
     render() {
         return (
-            <div style={{ marginTop: 20 }}>
+            <div className="topmargin">
                 <h3>All {this.props.match.params.coursename} Courses</h3>
-                <Content style={{ marginTop: 20 }} >
+                <Content className="contentmargin" >
                     <div className="course-header">
                         {this.state.showbuttons ? <Button size='large' onClick={this.setshowbutton}>Filter</Button> : null}
                         {this.state.showbuttons ?
@@ -102,7 +102,7 @@ class Filter extends Component {
                         }
                         {!this.state.showbuttons ?
                             <div>
-                                <Button size='large' style={{ backgroundColor: 'black', color: 'white' }} onClick={this.applyclickhandler}>APPLY</Button>&nbsp;&nbsp;
+                                <Button size='large' className="applybutton" onClick={this.applyclickhandler}>APPLY</Button>&nbsp;&nbsp;
                                 <Button size='large' onClick={this.cancelclickhandler}>CANCEL</Button>
                                 <div><br />
                                     <span><b>Price : </b></span><Checkbox.Group options={this.state.prices1} onChange={this.onChange} /><br />
@@ -112,7 +112,7 @@ class Filter extends Component {
                     </div>
                 </Content>
                 Sort : <Select
-                    style={{ width: 200, marginTop: 15 }}
+                    className="sortselect"
                     placeholder="Select a order"
                     onChange={this.ondropdownClick}
                 >
@@ -120,7 +120,7 @@ class Filter extends Component {
                     <Option value="a">Lowest to Highest Price</Option>
                     <Option value="b">Highest to Lowest Price</Option>
                 </Select>
-                <div style={{ dispaly: 'flex', marginTop: 10 }}  >
+                <div className="sortcontent" >
                     <div className="gutter-example">
                         <Row gutter={16} >
                             {this.filterandsorting().map((subcat, i) => [

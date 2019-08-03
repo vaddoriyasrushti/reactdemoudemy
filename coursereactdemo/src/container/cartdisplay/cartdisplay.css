@@ -1,0 +1,27 @@
+.courseheader{
+    padding: 12px;
+    background: #fff;
+    min-height: 65px;
+    font-size: 25px;
+    font-weight: 500;
+}
+.content{
+    padding: 12px;
+    background: #fff;
+    min-height: 65px;
+    font-size: 17px;
+    
+}
+.centerremoveheader{
+    text-align: center;
+    }
+.centerremove{
+    text-align: center;
+    color:red;
+}
+.margin-content {
+  margin: 88px 20px 5px;
+}
+.paddingbetween {
+  padding-bottom: 30px;
+}

@@ -1,0 +1,32 @@
+.wrap-main-div {
+     min-height: 400px;
+     background-color : black;
+     padding: 3rem; 
+}
+.wrap-div {
+    padding:24px;
+    display:flex; 
+}
+.color-white {
+    color:white;
+}
+.border-video {
+    border:15px solid white;
+    border-radius:25px;
+}
+.courseheader{
+    padding: 12px;
+    background: #fff;
+    min-height: 65px;
+    font-size: 25px;
+    font-weight: 500;
+}
+.margin-content {
+    margin: 88px 20px 5px;
+}
+.paddingbetween {
+    padding-bottom: 30px;
+}
+.divpadding {
+    padding: 15px;
+}

@@ -1,0 +1,15 @@
+.validationcolor{
+    color:red
+}
+.form {
+    width: 500px;
+}
+.wrap-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+.loginavatar {
+    margin-top: 100px;
+    text-align: center;
+}
