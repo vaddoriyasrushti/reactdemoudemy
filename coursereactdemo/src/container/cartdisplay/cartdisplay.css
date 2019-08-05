@@ -12,7 +12,7 @@
     font-size: 17px;
     
 }
-.centerremoveheader{
+.centerheader{
     text-align: center;
     }
 .centerremove{
@@ -24,4 +24,7 @@
 }
 .paddingbetween {
   padding-bottom: 30px;
+}
+.paddingcontent {
+  padding-left:90px!important;
 }

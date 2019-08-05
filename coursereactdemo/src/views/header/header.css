@@ -100,3 +100,8 @@
   -webkit-font-smoothing: antialiased;
   padding-right: 10px
 }
+.headerpopover {
+  display: flex;
+  align-items: center;
+  margin: 08px 0px
+}

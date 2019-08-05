@@ -25,7 +25,8 @@ const { Header, Sider } = Layout;
 class SideNavbar extends Component {
     state = {
         collapsed: false,
-        catname:'development',
+        catname: 'development',
+        subcat: 'Wev Development'
     }
     toggle = () => {
         this.setState({
@@ -50,6 +51,12 @@ class SideNavbar extends Component {
         this.props.history.push(`/course/${catname}`)
         //  this.props.history.push({pathname:`/course/${catname}`,state: { coursename: catname }})
     }
+    routesubcategory(subcat) {
+        this.props.history.push(`/course/${this.state.catname}/${subcat}`)
+    }
+    coursedetailroute = (topic,id) => {
+        this.props.history.push({ pathname: `/course/${this.state.catname}/${this.state.subcat}/${topic}`, state: {id:id} })
+    }
     routecourse = () => {
         this.props.history.push('/')
     }
@@ -59,31 +66,55 @@ class SideNavbar extends Component {
     routesearch = (searchtitle) => {
         this.props.history.push(`/search/${searchtitle}`)
     }
-    setsubcat = (catname)=>{
-        this.setState({catname:catname})
+    setsubcat = (catname) => {
+        this.setState({ catname: catname })
+    }
+    setsubcat1 = (subcat) => {
+        this.setState({ subcat: subcat })
     }
     getsubtosubcategories = () => {
         var subtosubcat = [];
-        console.log("catname",this.state.catname)
-        this.props.Allsubcat.filter((item)=>{ console.log(item.catname,"Fvvfd",this.state.catname.toLowerCase()); return(item.catname.toLowerCase()===this.state.catname.toLowerCase())})
-         .map((subcat) => {
-          var index = subtosubcat.indexOf(subcat.allsubtosub)
-          if (index === -1) {
-            subtosubcat.push(subcat.allsubtosub)
-          }
-        })
-        console.log("subcat",subtosubcat)
+        this.props.Allsubcat.filter((item) => { return (item.catname.toLowerCase() === this.state.catname.toLowerCase()) })
+            .map((subcat) => {
+                var index = subtosubcat.indexOf(subcat.allsubtosub)
+                if (index === -1) {
+                    subtosubcat.push(subcat.allsubtosub)
+                }
+            })
         return subtosubcat
-      }
+    }
+    getsubtosubcategories1 = () => {
+        var subtosubcat = [];
+        this.props.Allsubcat.filter((item) => { return (item.allsubtosub.toLowerCase() === this.state.subcat.toLowerCase()) })
+            .map((subcat) => {
+                    let x={
+                        id:subcat.id,
+                        topic:subcat.populartopic
+                    }
+                    subtosubcat.push(x)
+            })
+        return subtosubcat
+    }
     render() {
+        const content3 = (
+            <div className="category-point">
+                {this.getsubtosubcategories1().map((value, index) => {
+                    return [
+                        <div className="headerpopover" key={index} onClick={()=>{this.coursedetailroute(value.topic,value.id)}}>
+                            <span style={{ width: 150 }}>{value.topic}</span>
+                        </div>,]
+                })}
+            </div>
+        );
         const content2 = (
             <div className="category-point">
                 {this.getsubtosubcategories().map((value, index) => {
                     return [
-                        <div style={{ display: 'flex', alignItems: 'center', margin: '16px 0' }} key={index} onClick={() => this.routecategory(value)}>
-                            <span style={{width:150}}>{value}</span>
-                            <Popover content={content2}><i className="material-icons" style={{right:0}}>keyboard_arrow_right</i></Popover>
-                        </div>,]
+                        <Popover placement="rightTop" content={content3} key={index}>
+                        <div className="headerpopover" onMouseOver={() => { this.setsubcat1(value) }} >
+                            <span style={{ width: 150 }} onClick={() => this.routesubcategory(value)}>{value}</span>
+                            <i className="material-icons" >keyboard_arrow_right</i>
+                        </div></Popover>,]
                 })}
             </div>
         );
@@ -91,10 +122,11 @@ class SideNavbar extends Component {
             <div className="category-point">
                 {this.props.showcat.map((value, index) => {
                     return [
-                        <div style={{ display: 'flex', alignItems: 'center', margin: '16px 0' }} key={index} onClick={() => this.routecategory(value.categoriesname)}>
-                            <i className="material-icons">{value.categoriesicon}</i><span style={{width:150}}>{value.categoriesname}</span>
-                            <Popover content={content2}><i className="material-icons" style={{right:0}} onMouseOver={()=>{this.setsubcat(value.categoriesname)}}>keyboard_arrow_right</i></Popover>
-                        </div>,]
+                        <Popover content={content2} placement="rightTop" key={index}>
+                            <div className="headerpopover" onClick={() => this.routecategory(value.categoriesname)} onMouseOver={() => { this.setsubcat(value.categoriesname) }}>
+                                <i className="material-icons">{value.categoriesicon}</i><span style={{ width: 150 }}>{value.categoriesname}</span>
+                                <i className="material-icons" >keyboard_arrow_right</i>
+                            </div></Popover>,]
                 })}
             </div>
         );
@@ -161,7 +193,8 @@ class SideNavbar extends Component {
                         <Route exact path="/course/:coursename" component={Coursepage} />
                         <Route exact path="/cart" component={cartdisplay} />
                         <Route exact path="/search/:searchtitle" component={Searchpage} />
-                        <Route exact path="/course/:coursename/:topic" component={Coursedetail} {...this.props} />
+                        <Route exact path="/course/:coursename/:subcat" component={Coursepage} />
+                        <Route exact path="/course/:coursename/:subcat/:topic" component={Coursedetail} {...this.props} />
                         {/* <Route exact path="/course/:coursename" 
                         render={(routeProps) => ( <Coursepage xyz={routeProps} /> )}/> */}
 

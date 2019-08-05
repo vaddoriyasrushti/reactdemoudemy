@@ -1,10 +1,10 @@
 .wrap-main-div {
-     min-height: 400px;
+     min-height: 350px;
      background-color : black;
      padding: 3rem; 
 }
 .wrap-div {
-    padding:24px;
+    padding:15px;
     display:flex; 
 }
 .color-white {

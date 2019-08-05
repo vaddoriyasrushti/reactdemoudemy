@@ -58,7 +58,6 @@ class UserRegistration extends Component {
     }
 
     btnRegisterClick() {
-        console.log("buttonRegisterclick")
         if (this.state.password === "")
             this.setState({
                 fieldsErrors: {

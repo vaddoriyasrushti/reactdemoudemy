@@ -10,7 +10,9 @@ const Coursehover = (props) => {
   const addtocart = (x) => {
     props.action.cart.addCourse(x)
   }
-
+  const callcart = () => {
+    props.history.push('/cart')
+}
   return (
     <div className="course-hover-item">
       <div className="mb-2">Last Updated : {props.detail.updatedAt}</div>
@@ -26,7 +28,7 @@ const Coursehover = (props) => {
         <li>Aliquam ut dolor in lorem accumsan porta.</li>
       </ul>
       {
-        props.cart.courseCart.some(el => el.id === props.detail.id) ? <div><Button color="danger" block >Go To Cart</Button></div> :
+        props.cart.courseCart.some(el => el.id === props.detail.id) ? <div><Button color="danger" block onClick={() => { callcart() }}>Go To Cart</Button></div> :
           <div><Button color="danger" block onClick={() => { addtocart(props.detail) }}>Add To Cart</Button></div>
       }
     </div>

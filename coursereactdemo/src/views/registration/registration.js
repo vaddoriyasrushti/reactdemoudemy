@@ -72,7 +72,6 @@ class UserRegistration extends Component {
     }
 
     btnRegisterClick() {
-        console.log("buttonRegisterclick")
         if (this.state.confirmPassword === "")
             this.setState({
                 fieldsErrors: {
@@ -116,7 +115,6 @@ class UserRegistration extends Component {
         }
 
         if (this.state.formValid && abc) {
-            console.log("pass data in register", this.state)
                this.props.action.register.RegisterUser(this.state).then((res)=>{
                 this.props.history.push('/');
                }).catch((error)=>{

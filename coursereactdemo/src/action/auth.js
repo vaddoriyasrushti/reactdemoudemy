@@ -8,7 +8,6 @@ export const loginUser = (credentials) => {
         return new Promise((resolve,reject)=>{
         authService.login(credentials)
             .then((response) => {
-                console.log("status",response.status)
                 if (response.data.status) {
                     localStorage.setItem("user", JSON.stringify(response.data))
                     dispatch({
@@ -45,7 +44,6 @@ export const loginUser = (credentials) => {
             })
             .catch((error) => {
                 if (error) {
-                    console.log("error",error)
                     dispatch({ type: FAILED, data: { error_msg: error.response.data.error } });
                 }
             });
@@ -70,7 +68,6 @@ export const RegisterUser = (credentials) => {
         return new Promise((resolve,reject)=>{
         authService.signUp(credentials)
             .then((response) => {
-                console.log("signup",response)
                 if (response.data.status) {
                     let credentials_Login = {
                         email: credentials.email,

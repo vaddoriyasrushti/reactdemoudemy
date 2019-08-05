@@ -6,10 +6,10 @@ import {url} from '../../url'
 
 const CardDemo = (props) => {
     const coursedetailroute = () => {
-        props.history.push({ pathname: `/course/${props.details.catname}/${props.details.populartopic}`, state: { id: props.details.id } })
+        props.history.push({ pathname: `/course/${props.details.catname}/${props.details.allsubtosub}/${props.details.populartopic}`, state: { id: props.details.id } })
     }
     const content = (
-        <Coursehover detail={props.details} />
+        <Coursehover detail={props.details} {...props} />
     );
     return (
         <div>

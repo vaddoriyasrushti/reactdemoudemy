@@ -111,7 +111,7 @@ class Filter extends Component {
                         }
                     </div>
                 </Content>
-                Sort : <Select
+                <b>Sort</b> : <Select
                     className="sortselect"
                     placeholder="Select a order"
                     onChange={this.ondropdownClick}

@@ -7,7 +7,6 @@ export const postCartitemAction = (data) => {
         return new Promise((resolve, reject) => {
             cartservice.postcartitem(data)
                 .then((res) => {
-                    console.log("X", res)
                     if (res) {
                         service.fetchsubcategoriesbyid(res.data.catid).then((res) => {
                             dispatch({
@@ -40,9 +39,7 @@ export const getCartitembyuseridAction = (userid) => {
                             service.fetchsubcategoriesbyid(item.catid).then((res) => {
                                 x.push(res.data[0])
                             })
-                            console.log("1")
                         }),
-                        console.log("SDcsdcfsd"),
                         dispatch({
                             type: FetchCartitemofuser,
                             data: x

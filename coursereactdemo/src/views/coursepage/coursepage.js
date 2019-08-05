@@ -27,12 +27,24 @@ class Coursepage extends Component {
   }
   onRouteChanged() {
     this.props.action.subcategories.FetchsubcatbynameAction(this.props.match.params.coursename)
-    this.setState({
-      key: this.props.match.params.coursename
-    })
+    if (this.props.match.path === "/course/:coursename") {
+      this.setState({
+        key: this.props.match.params.coursename
+      })
+    }
+    if (this.props.match.path === "/course/:coursename/:subcat") {
+      this.setState({
+        key: this.props.match.params.subcat
+      })
+    }
   }
   componentWillMount() {
     this.props.action.subcategories.FetchsubcatbynameAction(this.props.match.params.coursename)
+    if (this.props.match.path === "/course/:coursename/:subcat") {
+      this.setState({
+        key: this.props.match.params.subcat
+      })
+    }
   }
   filteredList() {
     const value = this.state.key.toLowerCase();
@@ -63,7 +75,7 @@ class Coursepage extends Component {
     }
     return (
       <div className="afterheader">
-        <Tabs defaultActiveKey={this.props.match.params.coursename} onChange={callback} tabPosition='top' className="tabheight">
+        <Tabs activeKey={this.state.key} onChange={callback} tabPosition='top' className="tabheight">
           {this.getsubtosubcategories().map(i => (
             <TabPane tab={i.toUpperCase()} key={i}>
               <Content >

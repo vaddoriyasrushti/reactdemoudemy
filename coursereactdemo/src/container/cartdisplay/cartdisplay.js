@@ -16,18 +16,15 @@ const Cartdisplay = (props) => {
         }
         if (localStorage.getItem("user")) {
             var user = JSON.parse(localStorage.getItem("user"))
-            console.log("check")
             props.action.cart.getCartitembyuseridAction(user.user[0].userid)
         }
     } , []);
-   
     const removeCourse = (id) => {
         props.action.cart.removeCourse(id)
     }
     const redirecthome = () => {
         props.history.push('/')
     }
-
     return (
         <Content className="margin-content">
             <div className="courseheader">CART</div>
@@ -39,20 +36,19 @@ const Cartdisplay = (props) => {
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Image</th>
-                                    <th>Description</th>
+                                    <th className="centerheader">Image</th>
+                                    <th className="paddingcontent">Description</th>
                                     <th>Author</th>
                                     <th>price</th>
-                                    <th className="centerremoveheader">remove</th>
+                                    <th className="centerheader">remove</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {props.cart.courseCart.map((item, i) => [
-                                    console.log("itm", item),
                                     <tr key={i}>
                                         <th scope="row">{++i}</th>
-                                        <td><img alt="example" height='70px' width="100px" src={url+'/images/' + item.topicimage} /></td>
-                                        <td>{item.description}</td>
+                                        <td className="centerheader"><img alt="example" height='70px' width="100px" src={url+'/images/' + item.topicimage} /></td>
+                                        <td className="paddingcontent">{item.description}</td>
                                         <td>{item.author}</td>
                                         <td>₹{item.price}</td>
                                         <td className="centerremove" onClick={() => removeCourse(item.id)}><Icon type="close-circle" /></td>
