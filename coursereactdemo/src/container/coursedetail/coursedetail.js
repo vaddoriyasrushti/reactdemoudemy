@@ -42,11 +42,13 @@ const Coursedetail = (props) => {
                         }
                     </div>
                     <div>
-                        <video width="356" height="250" className="border-video"
-                            src={url + '/images/' + details.videos}
-                            preload="auto"
-                            controls
-                        ></video>
+                        {details.videos ?                         
+                            <video width="356" height="250" className="border-video"
+                                src={url + '/images/' + details.videos}
+                                preload="auto"
+                                controls
+                            ></video> : null
+                        }
                     </div>
                 </div>
             </div>

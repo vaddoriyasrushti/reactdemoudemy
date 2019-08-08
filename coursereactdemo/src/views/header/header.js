@@ -28,14 +28,6 @@ class SideNavbar extends Component {
         catname: 'development',
         subcat: 'Wev Development'
     }
-    toggle = () => {
-        this.setState({
-            collapsed: !this.state.collapsed,
-        });
-    };
-    logout = () => {
-        this.props.action.register.logoutUser()
-    }
     componentDidMount() {
         this.props.action.categories.FetchCategoriesDataAction();
         this.props.action.subcategories.FetchAllsubcatAction();
@@ -47,6 +39,15 @@ class SideNavbar extends Component {
             this.props.action.cart.getCartitembyuseridAction(user.user[0].userid)
         }
     }
+    toggle = () => {
+        this.setState({
+            collapsed: !this.state.collapsed,
+        });
+    };
+    logout = () => {
+        this.props.action.register.logoutUser()
+    }
+   
     routecategory(catname) {
         this.props.history.push(`/course/${catname}`)
         //  this.props.history.push({pathname:`/course/${catname}`,state: { coursename: catname }})

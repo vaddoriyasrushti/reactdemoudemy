@@ -34,17 +34,18 @@ export const getCartitembyuseridAction = (userid) => {
             cartservice.getcartitembyuserid(userid)
                 .then((res) => {
                     if (res) {
-                        var x = []
-                        Promise.all([res.data.map((item) => {
-                            service.fetchsubcategoriesbyid(item.catid).then((res) => {
+                        var x = [];
+                        const results = res.data.map(async (item) => {
+                            return service.fetchsubcategoriesbyid(item.catid).then((res) => {
                                 x.push(res.data[0])
                             })
-                        }),
-                        dispatch({
-                            type: FetchCartitemofuser,
-                            data: x
                         })
-                        ])
+                        Promise.all(results).then((res) => {
+                            dispatch({
+                                type: FetchCartitemofuser,
+                                data: x
+                            })
+                        })
                     }
                     resolve(res)
                 })

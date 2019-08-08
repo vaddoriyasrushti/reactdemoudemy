@@ -60,7 +60,6 @@ router.post("/signin", (req, res) => {
             }
         })
         .then(result => {
-
             if (result.length > 0) {
                 if (req.body.password == result[0].password && req.body.role == result[0].role) {
                     res.json({
@@ -84,6 +83,5 @@ router.post("/signin", (req, res) => {
             }).status(400);
         });
 });
-
 
 module.exports = router;

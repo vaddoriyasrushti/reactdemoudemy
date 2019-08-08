@@ -8,6 +8,8 @@ import { Row, Col } from 'antd';
 import Card from '../../container/card/card';
 import Filter from '../filter/filter';
 import './coursepage.css'
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const { Content } = Layout;
 const { TabPane } = Tabs;
@@ -86,13 +88,62 @@ class Coursepage extends Component {
                 {this.filteredList().length === 0 ?
                   <div className="Nodataavilable">No Any Courses Avilable</div> :
                   <div className="gutter-example">
-                    <Row gutter={16} >
+                    {/* <Row gutter={16} >
                       {this.filteredList().map((subcat, i) => [
                         <Col className="gutter-row" span={6} key={i}>
                           <div className="gutter-box" key={i}> <Card details={subcat} {...this.props} /></div>
                         </Col>
                       ])}
-                    </Row>
+                    </Row> */}
+                    <Carousel
+                      additionalTransfrom={0}
+                      arrows
+                      autoPlaySpeed={0.5}
+                      centerMode={false}
+                      dotListClass=""
+                      draggable
+                      focusOnSelect={false}
+                      infinite={false}
+                      itemClass=""
+                      keyBoardControl
+                      minimumTouchDrag={80}
+                      renderDotsOutside={false}
+                      responsive={{
+                        desktop: {
+                          breakpoint: {
+                            max: 3000,
+                            min: 1024
+                          },
+                          items: 4,
+                          paritialVisibilityGutter: 40
+                        },
+                        mobile: {
+                          breakpoint: {
+                            max: 464,
+                            min: 0
+                          },
+                          items: 1,
+                          paritialVisibilityGutter: 30
+                        },
+                        tablet: {
+                          breakpoint: {
+                            max: 1024,
+                            min: 464
+                          },
+                          items: 2,
+                          paritialVisibilityGutter: 30
+                        }
+                      }}
+                      showDots={false}
+                      sliderClass=""
+                      slidesToSlide={1}
+                      swipeable
+                    >
+                     {this.filteredList().map((subcat, i) => [
+                     
+                          <div key={i}> <Card details={subcat} {...this.props} /></div>
+                      ])}
+                      </Carousel>
                     <Filter {...this.props}></Filter>
                   </div>
                 }

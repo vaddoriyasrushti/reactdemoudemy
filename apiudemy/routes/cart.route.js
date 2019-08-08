@@ -54,8 +54,7 @@ router.delete('/:userid/:catid', (req, res) => {
 });
 
 router.post("/", (req, res) => {
-    cart
-        .findAll({
+    cart.findAll({
             where: {
                 userid:req.body.userid,
                 catid:req.body.catid
@@ -76,7 +75,6 @@ router.post("/", (req, res) => {
                         res.json(cart).status(200);
                     })
                     .catch(err => {
-                        
                         res.json({
                             error: err
                         }).status(400);

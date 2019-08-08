@@ -5,12 +5,13 @@ import './cartdisplay.css';
 import { bindActionCreators } from "redux";
 import { Table, Button } from 'reactstrap';
 import * as cartAction from '../../action/cart';
-import {url} from '../../url'
+import { url } from '../../url';
+import Paypal from '../../views/dropdownbutton'
 
 const { Content } = Layout;
 
 const Cartdisplay = (props) => {
-    useEffect(() =>{
+    useEffect(() => {
         if (localStorage.getItem("courses")) {
             props.action.cart.addstoragetoredux();
         }
@@ -18,7 +19,10 @@ const Cartdisplay = (props) => {
             var user = JSON.parse(localStorage.getItem("user"))
             props.action.cart.getCartitembyuseridAction(user.user[0].userid)
         }
-    } , []);
+    }, []);
+    const checkout = () => {
+        props.history.push('/login')
+    }
     const removeCourse = (id) => {
         props.action.cart.removeCourse(id)
     }
@@ -39,7 +43,7 @@ const Cartdisplay = (props) => {
                                     <th className="centerheader">Image</th>
                                     <th className="paddingcontent">Description</th>
                                     <th>Author</th>
-                                    <th>price</th>
+                                    <th className="paddingprice">price</th>
                                     <th className="centerheader">remove</th>
                                 </tr>
                             </thead>
@@ -47,10 +51,10 @@ const Cartdisplay = (props) => {
                                 {props.cart.courseCart.map((item, i) => [
                                     <tr key={i}>
                                         <th scope="row">{++i}</th>
-                                        <td className="centerheader"><img alt="example" height='70px' width="100px" src={url+'/images/' + item.topicimage} /></td>
+                                        <td className="centerheader"><img alt="example" height='70px' width="100px" src={url + '/images/' + item.topicimage} /></td>
                                         <td className="paddingcontent">{item.description}</td>
                                         <td>{item.author}</td>
-                                        <td>₹{item.price}</td>
+                                        <td className="paddingprice">₹{item.price}</td>
                                         <td className="centerremove" onClick={() => removeCourse(item.id)}><Icon type="close-circle" /></td>
                                     </tr>
                                 ])}
@@ -59,10 +63,14 @@ const Cartdisplay = (props) => {
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>  Total Price : ₹{props.cart.courseCart.reduce(function (prev, cur) {
+                                    <td><b>Total Price : ₹{props.cart.courseCart.reduce(function (prev, cur) {
                                         return prev + cur.price;
-                                    }, 0)}</td>
-                                    <td></td>
+                                    }, 0)}</b></td>
+                                    <td>
+                                        {localStorage.getItem('user') ? <Paypal {...props} /> :
+                                            <Button color="danger" onClick={checkout}>Check Out</Button>
+                                        }
+                                    </td>
                                 </tr>
                             </tbody>
                         </Table> : <div>

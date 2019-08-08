@@ -1,5 +1,4 @@
 const INITIAL_STATE = {
-    //coursecart:[],
     courseCart: []
 }
 export const PostCartItem = 'PostCartItem';
