@@ -7,7 +7,7 @@ import Registartion from '../../views/registration/registration';
 import Login from '../../views/login/login';
 import './authsidebar.css'
 
-const Signup = (props) => {
+const Authsidebar = (props) => {
     return (
         <div className="headermargin">
             <Row>
@@ -32,4 +32,4 @@ const Signup = (props) => {
 }
 
 
-export default Signup
+export default Authsidebar

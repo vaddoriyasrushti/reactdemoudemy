@@ -33,7 +33,6 @@ var allupload = upload.fields([{
 }]);
 
 router.post('/', allupload, (req, res, next) => {
-    console.log("req.files", req.files.topicimage[0].filename);
     let imagePath = path.join(__dirname, '../images/' + req.files.topicimage[0].filename);
     let thumbnailImagePath = path.join(__dirname, '../images/thumbnailImages/' + req.files.topicimage[0].filename);
     Jimp.read(imagePath)

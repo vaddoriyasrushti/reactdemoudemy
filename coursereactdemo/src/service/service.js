@@ -15,4 +15,11 @@ export function fetchsubcategoriesbyname(catname){
 export function fetchsubcategoriesbyid(id){
     return baseService.get('/subcategories/id/'+id)
 }
+export function fetchsubcat(){
+    return baseService.get('/subcat')
+}
+export function postsubcategory(formData){
+    console.log("dataservice",formData)
+    return baseService.post('/subcategories',formData)
+}
  

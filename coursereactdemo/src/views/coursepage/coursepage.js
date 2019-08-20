@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { Layout, Tabs } from 'antd';
 import * as SUbCategoriesAction from '../../action/subcategories'
 import '../../container/slidingtab/slidingtab.css'
-import { Row, Col } from 'antd';
+// import { Row, Col } from 'antd';
 import Card from '../../container/card/card';
 import Filter from '../filter/filter';
 import './coursepage.css'

@@ -1,0 +1,25 @@
+.afterheaderr {
+    /* margin: 64px 0px 5px; */
+    height:calc(100vh - 64px);
+}
+.main-wrap {
+    margin: 64px 0 0;
+}
+.validationcolor{
+    color:red
+}
+.column-1 {
+    height:calc(100vh - 64px);
+    background-color: lightgray;
+    overflow:auto;
+}
+.headingcenter {
+    text-align: center;
+}
+.column-2 {
+    display: flex !important;
+    height:calc(100vh - 64px);
+}
+.card-width{
+    margin: auto !important;
+}

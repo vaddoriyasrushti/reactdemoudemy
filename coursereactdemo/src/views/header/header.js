@@ -5,18 +5,14 @@ import { Layout, Menu, Icon, Avatar, Popover, Badge } from 'antd';
 import { Button } from 'reactstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
-import { Link, Route, Switch } from 'react-router-dom';
-import Signup from '../../container/authsidebar/authsidebar';
-import Home from '../../container/home/home';
 import * as registerAction from '../../action/auth';
-import Coursedetail from '../../container/coursedetail/coursedetail';
-import Coursepage from '../coursepage/coursepage';
 import * as CategoriesAction from '../../action/categories'
 import * as SUbCategoriesAction from '../../action/subcategories'
 import * as cartAction from '../../action/cart';
 import Cartitem from '../../container/cartitem/cartitem'
-import cartdisplay from '../../container/cartdisplay/cartdisplay';
-import Searchpage from '../../container/search/search';
+import { Link } from 'react-router-dom';
+import Router from '../../router/router';
+
 import { Input } from 'antd';
 
 const { Search } = Input;
@@ -47,7 +43,6 @@ class SideNavbar extends Component {
     logout = () => {
         this.props.action.register.logoutUser()
     }
-   
     routecategory(catname) {
         this.props.history.push(`/course/${catname}`)
         //  this.props.history.push({pathname:`/course/${catname}`,state: { coursename: catname }})
@@ -55,8 +50,8 @@ class SideNavbar extends Component {
     routesubcategory(subcat) {
         this.props.history.push(`/course/${this.state.catname}/${subcat}`)
     }
-    coursedetailroute = (topic,id) => {
-        this.props.history.push({ pathname: `/course/${this.state.catname}/${this.state.subcat}/${topic}`, state: {id:id} })
+    coursedetailroute = (topic, id) => {
+        this.props.history.push({ pathname: `/course/${this.state.catname}/${this.state.subcat}/${topic}`, state: { id: id } })
     }
     routecourse = () => {
         this.props.history.push('/')
@@ -88,20 +83,23 @@ class SideNavbar extends Component {
         var subtosubcat = [];
         this.props.Allsubcat.filter((item) => { return (item.allsubtosub.toLowerCase() === this.state.subcat.toLowerCase()) })
             .map((subcat) => {
-                    let x={
-                        id:subcat.id,
-                        topic:subcat.populartopic
-                    }
-                    subtosubcat.push(x)
+                let x = {
+                    id: subcat.id,
+                    topic: subcat.populartopic
+                }
+                subtosubcat.push(x)
             })
         return subtosubcat
+    }
+    teachonudemybuttonhandler = () => {
+        this.props.history.push('/addcourse')
     }
     render() {
         const content3 = (
             <div className="category-point">
                 {this.getsubtosubcategories1().map((value, index) => {
                     return [
-                        <div className="headerpopover" key={index} onClick={()=>{this.coursedetailroute(value.topic,value.id)}}>
+                        <div className="headerpopover" key={index} onClick={() => { this.coursedetailroute(value.topic, value.id) }}>
                             <span style={{ width: 150 }}>{value.topic}</span>
                         </div>,]
                 })}
@@ -112,10 +110,10 @@ class SideNavbar extends Component {
                 {this.getsubtosubcategories().map((value, index) => {
                     return [
                         <Popover placement="rightTop" content={content3} key={index}>
-                        <div className="headerpopover" onMouseOver={() => { this.setsubcat1(value) }} >
-                            <span style={{ width: 150 }} onClick={() => this.routesubcategory(value)}>{value}</span>
-                            <i className="material-icons" >keyboard_arrow_right</i>
-                        </div></Popover>,]
+                            <div className="headerpopover" onMouseOver={() => { this.setsubcat1(value) }} >
+                                <span style={{ width: 150 }} onClick={() => this.routesubcategory(value)}>{value}</span>
+                                <i className="material-icons" >keyboard_arrow_right</i>
+                            </div></Popover>,]
                 })}
             </div>
         );
@@ -172,6 +170,9 @@ class SideNavbar extends Component {
                         </Popover>
                         <Search placeholder="input search text" className="search" onSearch={value => value.trim() ? this.routesearch(value) : null} />
                         <div className='cart-logo-style'>
+                            {localStorage.getItem('user') ?
+                                <Button style={{ marginRight: 20 }} outline color="secondary" onClick={this.teachonudemybuttonhandler}>Teach On Udemy</Button> : null
+                            }
                             <Popover content={cartitem} placement="bottomRight">
                                 <span className="cartspan" onClick={this.callcart}>
                                     <Badge count={this.props.cart.courseCart.length}>
@@ -182,30 +183,19 @@ class SideNavbar extends Component {
                                     </Badge>
                                 </span>
                             </Popover>
-                            {!this.props.auth.token ? [<Button key="signup" color="danger" className="mr-2" tag={Link} to='/signup'>SignUp</Button>,
-                            <Button key="login" color="danger" tag={Link} to='/login'>Login</Button>] :
+                            {!this.props.auth.token ? [
+                                <Button key="signup" color="danger" className="mr-2" tag={Link} to='/signup'>SignUp</Button>,
+                                <Button key="login" color="danger" tag={Link} to='/login'>Login</Button>
+                            ] :
                                 <Button color="danger" onClick={this.logout}>Logout</Button>}
                         </div>
                     </Header>
-                    <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/signup" component={Signup} />
-                        <Route path="/login" component={Signup} />
-                        <Route exact path="/course/:coursename" component={Coursepage} />
-                        <Route exact path="/cart" component={cartdisplay} />
-                        <Route exact path="/search/:searchtitle" component={Searchpage} />
-                        <Route exact path="/course/:coursename/:subcat" component={Coursepage} />
-                        <Route exact path="/course/:coursename/:subcat/:topic" component={Coursedetail} {...this.props} />
-                        {/* <Route exact path="/course/:coursename" 
-                        render={(routeProps) => ( <Coursepage xyz={routeProps} /> )}/> */}
-
-                    </Switch>
+                    <Router {...this.props} />
                 </Layout>
             </Layout >
         )
     }
 }
-
 const mapStateToProps = (state) => {
     const { categories } = state
     return (

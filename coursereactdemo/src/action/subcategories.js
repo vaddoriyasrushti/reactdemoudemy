@@ -1,4 +1,4 @@
-import { FetchSubcatDatabyname, InvalidData, FetchSubcatDatabyid, FetchAllSubcategories } from "../reducer/subcategories";
+import { FetchSubcatDatabyname, InvalidData, FetchSubcatDatabyid, FetchAllSubcategories,FetchSubcatbycatname } from "../reducer/subcategories";
 import * as service from '../service/service'
 
 export const FetchAllsubcatAction = () => {
@@ -72,3 +72,49 @@ export const FetchsubcatbyidAction = (id) => {
     }
 }
 
+export const FetchsubcatAction = () => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            service.fetchsubcat().then((res) => {
+                if (res) {
+                    dispatch({
+                        type: FetchSubcatbycatname,
+                        data: res.data
+                    });
+                }
+                resolve(res)
+            })
+                .catch((error) => {
+                    if (error.res) {
+                        dispatch({
+                            type: InvalidData,
+                            data: "Invalid Data"
+                        })
+                    }
+                })
+        })
+    }
+}
+
+export const postsubcategory = (formData) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            service.postsubcategory(formData)
+                .then((response) => {
+                    console.log("responese")
+                    if (response.data.status) {
+                        resolve(response)
+                        console.log("responesevxcvx")
+                    }
+                    else {
+                        reject(response.data.message)
+                    }
+                })
+                .catch((error) => {
+                    if (error) {
+                        dispatch({ type: InvalidData, data: { error_msg: error.response.data.error } });
+                    }
+                })
+        })
+    }
+}

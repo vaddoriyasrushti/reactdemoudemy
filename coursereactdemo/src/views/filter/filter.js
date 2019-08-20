@@ -7,8 +7,8 @@ import '../../container/slidingtab/slidingtab.css'
 import { Row, Icon, Select } from 'antd';
 import './filter.css';
 import Horizontalcard from '../../container/horizontalcard/horizonatalcard';
-
 var orderBy = require('lodash.orderby');
+
 const { Option } = Select;
 const { Content } = Layout;
 

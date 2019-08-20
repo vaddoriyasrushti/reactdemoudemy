@@ -87,7 +87,6 @@ class UserRegistration extends Component {
                 }
             }        
             )
-
         if (this.state.email === "")
             this.setState({
                 fieldsErrors: {
@@ -95,7 +94,6 @@ class UserRegistration extends Component {
                     email: "* Email Required"
                 }
             })
-
         if (this.state.fullname === "")
             this.setState({
                 fieldsErrors: {
@@ -113,7 +111,6 @@ class UserRegistration extends Component {
                 }
             })
         }
-
         if (this.state.formValid && abc) {
                this.props.action.register.RegisterUser(this.state).then((res)=>{
                 this.props.history.push('/');

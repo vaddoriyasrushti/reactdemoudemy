@@ -44,6 +44,10 @@ module.exports = (sequalize, type) => {
         videos: {
             type: type.STRING,
             allowNull: false
+        },
+        status: {
+            type: type.INTEGER,
+            defaultValue: 0
         }
     })
 }
