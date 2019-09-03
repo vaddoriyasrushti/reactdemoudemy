@@ -2,6 +2,7 @@ import React from 'react';
 import { notification } from 'antd';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem ,Button} from 'reactstrap';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
+// import scriptLoader from 'react-async-script-loader';
 
 export default class Example extends React.Component {
     constructor(props) {
@@ -53,3 +54,4 @@ export default class Example extends React.Component {
         
     }
 }
+// export default scriptLoader('https://www.paypalobjects.com/api/checkout.js')(Example);

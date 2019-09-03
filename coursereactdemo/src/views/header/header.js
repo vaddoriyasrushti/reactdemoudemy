@@ -56,6 +56,9 @@ class SideNavbar extends Component {
     routecourse = () => {
         this.props.history.push('/')
     }
+    routechat = () => {
+        this.props.history.push('/chat')
+    }
     callcart = () => {
         this.props.history.push('/cart')
     }
@@ -152,6 +155,10 @@ class SideNavbar extends Component {
                         <Menu.Item onClick={this.routecourse}>
                             <Icon type="book" />
                             <span>Courses</span>
+                        </Menu.Item>
+                        <Menu.Item onClick={this.routechat}>
+                            <Icon type="book" />
+                            <span>Chat</span>
                         </Menu.Item>
                     </Menu>
                 </Sider>

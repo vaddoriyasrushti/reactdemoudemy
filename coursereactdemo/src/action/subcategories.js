@@ -101,10 +101,8 @@ export const postsubcategory = (formData) => {
         return new Promise((resolve, reject) => {
             service.postsubcategory(formData)
                 .then((response) => {
-                    console.log("responese")
                     if (response.data.status) {
                         resolve(response)
-                        console.log("responesevxcvx")
                     }
                     else {
                         reject(response.data.message)
